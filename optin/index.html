@@ -329,40 +329,7 @@
             <div class="guarantee-badge">Complete Framework + First 5 Emails - Free</div>
             
             <div class="form-container">
-               <script>
-async function submitForm(event) {
-    event.preventDefault();
-    
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.disabled = true;
-    
-    const firstName = document.getElementById('firstName').value;
-    const email = document.getElementById('email').value;
-    
-    try {
-        // Submit to Zapier webhook
-        await fetch('https://hooks.zapier.com/hooks/catch/14335374/uy7wpaj/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                firstName: firstName,
-                email: email,
-                source: 'habitemails-optin',
-                timestamp: new Date().toISOString()
-            })
-        });
-    } catch (error) {
-        console.log('Webhook error:', error);
-    }
-    
-    // Always redirect to thank you page
-    window.location.href = '/thankyou';
-}
-</script>
-<script>
+              <script>
 async function submitForm(event) {
     event.preventDefault();
     
