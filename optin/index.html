@@ -329,19 +329,53 @@
             <div class="guarantee-badge">Complete Framework + First 5 Emails - Free</div>
             
             <div class="form-container">
-                <form id="optinForm" action="/thankyou" method="GET">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your best email">
-                    </div>
-                    
-                    <button type="submit" class="cta-button">Send Me The Habit Sequence</button>
-                </form>
+                <form id="optinForm" onsubmit="submitForm(event)">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your best email">
+    </div>
+    
+    <button type="submit" class="cta-button" id="submitBtn">Send Me The Habit Sequence</button>
+</form>
+
+<script>
+async function submitForm(event) {
+    event.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    const firstName = document.getElementById('firstName').value;
+    const email = document.getElementById('email').value;
+    
+    try {
+        // Submit to Zapier webhook
+        await fetch('YOUR_ZAPIER_WEBHOOK_URL', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                email: email,
+                source: 'habitemails-optin',
+                timestamp: new Date().toISOString()
+            })
+        });
+    } catch (error) {
+        console.log('Webhook error:', error);
+    }
+    
+    // Always redirect to thank you page
+    window.location.href = '/thankyou';
+}
+</script>
             </div>
             
             <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
