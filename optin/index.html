@@ -329,20 +329,39 @@
             <div class="guarantee-badge">Complete Framework + First 5 Emails - Free</div>
             
             <div class="form-container">
-                <form id="optinForm" onsubmit="submitForm(event)">
-    <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
-    </div>
+               <script>
+async function submitForm(event) {
+    event.preventDefault();
     
-    <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required placeholder="Enter your best email">
-    </div>
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
     
-    <button type="submit" class="cta-button" id="submitBtn">Send Me The Habit Sequence</button>
-</form>
-
+    const firstName = document.getElementById('firstName').value;
+    const email = document.getElementById('email').value;
+    
+    try {
+        // Submit to Zapier webhook
+        await fetch('https://hooks.zapier.com/hooks/catch/14335374/uy7wpaj/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                email: email,
+                source: 'habitemails-optin',
+                timestamp: new Date().toISOString()
+            })
+        });
+    } catch (error) {
+        console.log('Webhook error:', error);
+    }
+    
+    // Always redirect to thank you page
+    window.location.href = '/thankyou';
+}
+</script>
 <script>
 async function submitForm(event) {
     event.preventDefault();
