@@ -1,392 +1,990 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Turn Subscribers Into Habitual Buyers</title>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap");
+
+      :root {
+        /* Colors - Updated for better contrast */
+        --primary: #008080;
+        --primary-dark: #006666;
+        --primary-light: #00a0a0;
+        --secondary: #ffd700;
+        --secondary-dark: #e6c200;
+        --text-primary: #e4e4e4;
+        --text-secondary: #a0a0a0;
+        --text-dark: #1a1a1a;
+        --text-muted: #666666;
+        --background: #fafafa;
+        --surface: #1e1e1e;
+        --surface-light: #2a2a2a;
+        --white: #ffffff;
+        --error: #dc2626;
+        --success: #059669;
+        --border-light: #e5e7eb;
+
+        /* Spacing */
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 1.5rem;
+        --space-lg: 2rem;
+        --space-xl: 2.5rem;
+        --space-2xl: 3rem;
+        --space-3xl: 4rem;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+        /* Border Radius */
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-full: 50px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--background);
+        color: var(--text-dark);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: var(--primary);
+        min-height: 600px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 128, 128, 0.95) 0%,
+          rgba(0, 160, 160, 0.95) 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--space-3xl) var(--space-lg);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3xl);
+        align-items: center;
+        min-height: 600px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-content {
+        z-index: 2;
+      }
+
+      .hero-eyebrow {
+        color: var(--secondary);
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: var(--space-sm);
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: var(--space-lg);
+        animation: fadeInUp 0.7s ease-out 0.1s both;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.125rem, 3vw, 1.5rem);
+        font-weight: 300;
+        color: var(--text-primary);
+        line-height: 1.4;
+        opacity: 0.95;
+        margin-bottom: var(--space-xl);
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+      }
+
+      .hero-cta {
+        background: var(--secondary);
+        color: var(--text-dark);
+        padding: var(--space-md) var(--space-xl);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 1.125rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: "Inter", sans-serif;
+        transition: all 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+        animation: fadeInUp 0.9s ease-out 0.3s both;
+        box-shadow: 0 4px 14px rgba(255, 215, 0, 0.4);
+      }
+
+      .hero-cta:hover {
+        background: var(--secondary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+      }
+
+      .hero-image {
+        position: relative;
+        height: 100%;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 1s ease-out 0.4s both;
+      }
+
+      .hero-image-placeholder {
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-primary);
+        font-size: 1.125rem;
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+      }
+
+      .hero-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Main Content */
+      .main-content {
+        background: var(--background);
+        position: relative;
+        z-index: 1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--space-3xl) var(--space-lg);
+      }
+
+      /* Problem Section - Enhanced */
+      .problem-section {
+        background: var(--white);
+        padding: var(--space-3xl);
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--space-3xl);
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .problem-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: var(--error);
+      }
+
+      .section-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(220, 38, 38, 0.1);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-lg);
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--text-dark);
+        margin-bottom: var(--space-lg);
+        font-weight: 700;
+      }
+
+      .section-intro {
+        margin-bottom: var(--space-xl);
+        font-size: 1.125rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      .problem-list {
+        list-style: none;
+        margin-bottom: var(--space-xl);
+      }
+
+      .problem-list-item {
+        padding: var(--space-md) 0;
+        padding-left: var(--space-xl);
+        font-size: 1rem;
+        color: var(--text-muted);
+        position: relative;
+        line-height: 1.7;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .problem-list-item:last-child {
+        border-bottom: none;
+      }
+
+      .problem-list-item::before {
+        content: "×";
+        color: var(--error);
+        font-weight: 700;
+        position: absolute;
+        left: 0;
+        font-size: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .problem-conclusion {
+        font-size: 1.125rem;
+        color: var(--text-dark);
+        font-weight: 600;
+        margin-top: var(--space-xl);
+        padding: var(--space-lg);
+        background: rgba(220, 38, 38, 0.05);
+        border-radius: var(--radius-md);
+        border-left: 4px solid var(--error);
+      }
+
+      /* Solution Section - Enhanced */
+      .solution-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        padding: var(--space-3xl);
+        border-radius: var(--radius-xl);
+        margin-bottom: var(--space-3xl);
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .solution-section::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        transform: scale(2);
+      }
+
+      .solution-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .solution-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--white);
+        margin-bottom: var(--space-lg);
+        font-weight: 700;
+      }
+
+      .solution-text {
+        font-size: 1.125rem;
+        color: var(--text-primary);
+        margin-bottom: var(--space-xl);
+        line-height: 1.7;
+        opacity: 0.95;
+      }
+
+      .benefits-list {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--space-lg);
+        margin-top: var(--space-xl);
+      }
+
+      .benefits-list-item {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        font-size: 1rem;
+        color: var(--text-primary);
+        position: relative;
+        line-height: 1.6;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .benefits-list-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .benefits-list-item strong {
+        display: block;
+        color: var(--secondary);
+        margin-bottom: var(--space-xs);
+      }
+
+      /* Combined Conversion Section */
+      .conversion-section {
+        background: var(--white);
+        padding: var(--space-3xl) 0;
+        margin-top: var(--space-3xl);
+        position: relative;
+      }
+
+      .conversion-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 var(--space-lg);
+      }
+
+      /* Testimonial Block */
+      .testimonial-block {
+        background: var(--background);
+        padding: var(--space-2xl);
+        border-radius: var(--radius-lg);
+        position: relative;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border-light);
+        margin-bottom: var(--space-3xl);
+      }
+
+      .quote-icon {
+        font-size: 3rem;
+        color: var(--primary);
+        opacity: 0.2;
+        position: absolute;
+        top: var(--space-lg);
+        left: var(--space-lg);
+      }
+
+      .testimonial-text {
+        font-size: 1.25rem;
+        color: var(--text-muted);
+        margin-bottom: var(--space-lg);
+        line-height: 1.8;
+        font-style: italic;
+        padding-left: var(--space-xl);
+      }
+
+      .testimonial-footer {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        padding-left: var(--space-xl);
+      }
+
+      .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        background: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+
+      .testimonial-info {
+        flex: 1;
+      }
+
+      .testimonial-author {
+        font-weight: 700;
+        color: var(--text-dark);
+        font-size: 1.125rem;
+      }
+
+      .testimonial-role {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+      }
+
+      /* Form Block */
+      .form-block {
+        background-color: var(--primary-light);
+        backdrop-filter: blur(10px);
+        color: var(--text-primary);
+        padding: var(--space-3xl);
+        border-radius: var(--radius-xl);
+        text-align: center;
+        box-shadow: var(--shadow-xl);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: var(--space-xl);
+      }
+
+      .form-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2.25rem;
+        margin-bottom: var(--space-md);
+        font-weight: 700;
+        color: var(--white);
+      }
+
+      .form-subtitle {
+        font-size: 1.125rem;
+        margin-bottom: var(--space-xl);
+        opacity: 0.9;
+        line-height: 1.6;
+        color: var(--text-primary);
+      }
+
+      .guarantee-badge {
+        background: linear-gradient(
+          135deg,
+          var(--secondary) 0%,
+          var(--secondary-dark) 100%
+        );
+        color: var(--text-dark);
+        padding: var(--space-sm) var(--space-lg);
+        border-radius: var(--radius-full);
+        display: inline-block;
+        font-weight: 700;
+        margin: var(--space-lg) 0;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 14px rgba(255, 215, 0, 0.3);
+      }
+
+      .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: var(--space-lg);
+        text-align: left;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: var(--space-xs);
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: var(--space-md);
+        border: 2px solid transparent;
+        border-radius: var(--radius-sm);
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--text-dark);
+        font-family: "Inter", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: var(--white);
+        box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.1);
+      }
+
+      .submit-button {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: var(--white);
+        padding: var(--space-md) var(--space-2xl);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-size: 1.125rem;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: "Inter", sans-serif;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .submit-button:hover::before {
+        left: 100%;
+      }
+
+      .submit-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 128, 128, 0.3);
+      }
+
+      .submit-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .form-footer {
+        font-size: 0.875rem;
+        margin-top: var(--space-xl);
+        opacity: 0.8;
+        line-height: 1.6;
+        color: var(--text-secondary);
+      }
+
+      /* Disclaimer Block */
+      .disclaimer-block {
+        background: var(--background);
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        text-align: center;
+        border: 1px solid var(--border-light);
+        line-height: 1.6;
+      }
+
+      .disclaimer-text {
+        margin-bottom: var(--space-sm);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        :root {
+          --space-xl: 2rem;
+          --space-2xl: 2.5rem;
+          --space-3xl: 3rem;
         }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #008080 0%, #006666 100%);
-            min-height: 100vh;
+        .hero-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+          padding: var(--space-2xl) var(--space-md);
+        }
+
+        .hero-image {
+          display: none;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+          padding: var(--space-2xl) var(--space-md);
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-top: 30px;
-        }
-
-        .eyebrow {
-            color: #FFD700;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .main-headline {
-            color: white;
-            font-size: 42px;
-            font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .sub-headline {
-            color: #E8F4FD;
-            font-size: 22px;
-            font-weight: 300;
-            margin-bottom: 30px;
-            line-height: 1.4;
-        }
-
-        .main-content {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .problem-section {
-            margin-bottom: 40px;
-        }
-
-        .problem-headline {
-            font-size: 24px;
-            color: #000000;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .problem-list {
-            list-style: none;
-            margin-bottom: 25px;
-        }
-
-        .problem-list li {
-            padding: 8px 0;
-            font-size: 16px;
-            color: #555;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .problem-list li:before {
-            content: "×";
-            color: #e74c3c;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 18px;
-        }
-
-        .solution-section {
-            background: #f0f8f8;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            border-left: 5px solid #008080;
-        }
-
-        .solution-headline {
-            font-size: 22px;
-            color: #000000;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .solution-text {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .problem-section,
+        .solution-section,
+        .form-block {
+          padding: var(--space-xl);
         }
 
         .benefits-list {
-            list-style: none;
-            margin-bottom: 25px;
+          grid-template-columns: 1fr;
         }
 
-        .benefits-list li {
-            padding: 8px 0;
-            font-size: 16px;
-            color: #555;
-            position: relative;
-            padding-left: 25px;
+        .section-title,
+        .solution-title,
+        .form-title {
+          font-size: 1.75rem;
         }
 
-        .benefits-list li:before {
-            content: "✓";
-            color: #008080;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 16px;
+        .conversion-section {
+          padding: var(--space-2xl) 0;
         }
 
-        .form-section {
-            background: #000000;
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
+        .testimonial-block {
+          padding: var(--space-xl);
         }
-
-        .form-headline {
-            font-size: 28px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .form-subtext {
-            font-size: 16px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .form-container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            background: white;
-            color: #333;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
-        }
-
-        .cta-button {
-            background: #008080;
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cta-button:hover {
-            background: #006666;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .social-proof {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .testimonial {
-            font-style: italic;
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #000000;
-        }
-
-        .disclaimer {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #666;
-            text-align: center;
-            border: 1px solid #e9ecef;
-        }
-
-        .guarantee-badge {
-            background: #008080;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            display: inline-block;
-            font-weight: bold;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .main-headline {
-                font-size: 32px;
-            }
-            
-            .sub-headline {
-                font-size: 18px;
-            }
-            
-            .main-content {
-                padding: 25px;
-            }
-            
-            .form-section {
-                padding: 25px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <div class="eyebrow">For Email List Owners Who Want Predictable Revenue</div>
-            <h1 class="main-headline">Turn Subscribers Into Habitual Buyers</h1>
-            <p class="sub-headline">The 21-day psychological sequence that makes purchasing feel automatic (without sleazy tactics or discount dependency)</p>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero-section" role="banner">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-eyebrow">
+            For Email List Owners Who Want Predictable Revenue
+          </div>
+          <h1 class="hero-title">Turn Subscribers Into Habitual Buyers</h1>
+          <p class="hero-subtitle">
+            The 21-day psychological sequence that makes purchasing feel
+            automatic (without sleazy tactics or discount dependency)
+          </p>
+          <a href="#optin-form" class="hero-cta">Get The Framework</a>
         </div>
-
-        <div class="main-content">
-            <div class="problem-section">
-                <h2 class="problem-headline">Your List Reads... But Doesn't Buy</h2>
-                <p style="margin-bottom: 20px; font-size: 16px; color: #555;">You've built an email list. You send valuable content. You've tried launches, promotions, and "relationship building." But something's still broken:</p>
-                
-                <ul class="problem-list">
-                    <li>Subscribers wait for discounts before buying anything</li>
-                    <li>Open rates drop every time you mention an offer</li>
-                    <li>Revenue feels like a rollercoaster: feast or famine</li>
-                    <li>You're stuck choosing between "providing value" and making sales</li>
-                    <li>Each launch requires more hype and more effort for the same results</li>
-                </ul>
-
-                <p style="font-size: 16px; color: #555; font-weight: bold; margin-top: 25px;">The problem isn't your offers. It's that your subscribers have never developed the <em>habit</em> of buying from you.</p>
-            </div>
-
-            <div class="solution-section">
-                <h3 class="solution-headline">What if buying from you felt as natural as checking social media?</h3>
-                <p class="solution-text">The <strong>Habit Email Sequence</strong> uses behavioral psychology to train your subscribers to purchase automatically without pressure, discounts, or manipulation.</p>
-                
-                <p class="solution-text">Based on the same habit-formation science that makes people check Instagram 150+ times per day, this system creates <strong>buying habits</strong> that generate consistent revenue.</p>
-
-                <ul class="benefits-list">
-                    <li><strong>Complete 21-day framework</strong> with psychological breakdown</li>
-                    <li><strong>First 5 emails</strong> ready to copy and customize</li>
-                    <li><strong>Phase-by-phase guide</strong> to habit formation</li>
-                    <li><strong>Real case studies</strong> showing before/after results</li>
-                    <li><strong>Implementation roadmap</strong> to get started immediately</li>
-                </ul>
-            </div>
-
-            <div class="social-proof">
-                <p class="testimonial">"I got the framework and first 5 emails, implemented them immediately. Even with just those 5 emails, I saw my open rates jump from 18% to 31%. Now I understand why traditional sequences weren't working. This approach is completely different."</p>
-                <p class="testimonial-author">Marcus T., Course Creator</p>
-            </div>
+        <div class="hero-image">
+          <!-- Replace this placeholder with your actual image -->
+          <div class="hero-image-placeholder">[Hero Image Here]</div>
+          <!-- Example of how to add an actual image:
+                <img src="path-to-your-image.jpg" alt="Email marketing success" />
+                -->
         </div>
+      </div>
+    </section>
 
-        <div class="form-section">
-            <h2 class="form-headline">Get the Complete Framework + First 5 Emails</h2>
-            <p class="form-subtext">The full 21-day psychology blueprint plus the exact emails that start building buying habits from day one</p>
-            
-            <div class="guarantee-badge">Complete Framework + First 5 Emails - Free</div>
-            
-            <div class="form-container">
-                <form id="optinForm" onsubmit="submitForm(event)">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your best email">
-                    </div>
-                    
-                    <button type="submit" class="cta-button" id="submitBtn">Send Me The Habit Sequence</button>
-                </form>
-            </div>
-            
-            <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
-                When you join, you'll get the complete 21-day framework, the psychology behind each phase, plus the first 5 emails to start implementing immediately.
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="container">
+        <!-- Problem Section -->
+        <section
+          class="problem-section"
+          role="region"
+          aria-label="Problem Overview"
+        >
+          <div class="section-icon">⚠️</div>
+          <h2 class="section-title">Your List Reads... But Doesn't Buy</h2>
+          <p class="section-intro">
+            You've built an email list. You send valuable content. You've tried
+            launches, promotions, and "relationship building." But something's
+            still broken:
+          </p>
+
+          <ul class="problem-list">
+            <li class="problem-list-item">
+              Subscribers wait for discounts before buying anything
+            </li>
+            <li class="problem-list-item">
+              Open rates drop every time you mention an offer
+            </li>
+            <li class="problem-list-item">
+              Revenue feels like a rollercoaster: feast or famine
+            </li>
+            <li class="problem-list-item">
+              You're stuck choosing between "providing value" and making sales
+            </li>
+            <li class="problem-list-item">
+              Each launch requires more hype and more effort for the same
+              results
+            </li>
+          </ul>
+
+          <p class="problem-conclusion">
+            The problem isn't your offers. It's that your subscribers have never
+            developed the <em>habit</em> of buying from you.
+          </p>
+        </section>
+
+        <!-- Solution Section -->
+        <section
+          class="solution-section"
+          role="region"
+          aria-label="Solution Overview"
+        >
+          <div class="solution-content">
+            <h3 class="solution-title">
+              What if buying from you felt as natural as checking social media?
+            </h3>
+            <p class="solution-text">
+              The <strong>Habit Email Sequence</strong> uses behavioral
+              psychology to train your subscribers to purchase automatically
+              without pressure, discounts, or manipulation.
             </p>
-        </div>
 
-        <div class="disclaimer">
-            <p><strong>Disclaimer:</strong> Results may vary. We cannot guarantee any income. This training is based on principles of behavioral psychology and our experience working with email lists. Your results will depend on your implementation, market, and offer quality.</p>
-            <p style="margin-top: 10px;">Copyright © 2025 Abdurrub LLC. All rights reserved.</p>
+            <p class="solution-text">
+              Based on the same habit-formation science that makes people check
+              Instagram 150+ times per day, this system creates
+              <strong>buying habits</strong> that generate consistent revenue.
+            </p>
+
+            <ul class="benefits-list">
+              <li class="benefits-list-item">
+                <strong>Complete 21-day framework</strong>
+                with psychological breakdown of each phase
+              </li>
+              <li class="benefits-list-item">
+                <strong>First 5 emails</strong>
+                ready to copy, customize, and send immediately
+              </li>
+              <li class="benefits-list-item">
+                <strong>Phase-by-phase guide</strong>
+                to implementing habit formation in your emails
+              </li>
+              <li class="benefits-list-item">
+                <strong>Real case studies</strong>
+                showing before/after results from actual lists
+              </li>
+              <li class="benefits-list-item">
+                <strong>Implementation roadmap</strong>
+                to get started and see results within days
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Combined Conversion Section -->
+      <section
+        class="conversion-section"
+        role="region"
+        aria-label="Get Started"
+        id="optin-form"
+      >
+        <div class="conversion-container">
+          <!-- Testimonial -->
+          <div class="testimonial-block">
+            <span class="quote-icon">"</span>
+            <p class="testimonial-text">
+              I got the framework and first 5 emails, implemented them
+              immediately. Even with just those 5 emails, I saw my open rates
+              jump from 18% to 31%. Now I understand why traditional sequences
+              weren't working. This approach is completely different.
+            </p>
+            <div class="testimonial-footer">
+              <div class="testimonial-avatar">MT</div>
+              <div class="testimonial-info">
+                <p class="testimonial-author">Marcus T.</p>
+                <p class="testimonial-role">Course Creator</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <div class="form-block">
+            <h2 class="form-title">
+              Get the Complete Framework + First 5 Emails
+            </h2>
+            <p class="form-subtitle">
+              The full 21-day psychology blueprint plus the exact emails that
+              start building buying habits from day one
+            </p>
+
+            <div class="guarantee-badge">
+              Complete Framework + First 5 Emails - Free
+            </div>
+
+            <div class="form-container">
+              <form id="optinForm">
+                <div class="form-group">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    class="form-input"
+                    required
+                    placeholder="Enter your first name"
+                    aria-required="true"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    required
+                    placeholder="Enter your best email"
+                    aria-required="true"
+                  />
+                </div>
+
+                <button type="submit" class="submit-button" id="submitBtn">
+                  Send Me The Habit Sequence
+                </button>
+              </form>
+            </div>
+
+            <p class="form-footer">
+              When you join, you'll get the complete 21-day framework, the
+              psychology behind each phase, plus the first 5 emails to start
+              implementing immediately.
+            </p>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="disclaimer-block">
+            <p class="disclaimer-text">
+              <strong>Disclaimer:</strong> Results may vary. We cannot guarantee any
+              income. This training is based on principles of behavioral psychology
+              and our experience working with email lists. Your results will depend
+              on your implementation, market, and offer quality.
+            </p>
+            <p>Copyright © 2025 Abdurrub LLC. All rights reserved.</p>
+          </div>
         </div>
+      </section>
     </div>
 
     <script>
-    async function submitForm(event) {
-        event.preventDefault();
-        
-        const submitBtn = document.getElementById('submitBtn');
-        submitBtn.textContent = 'Submitting...';
-        submitBtn.disabled = true;
-        
-        const firstName = document.getElementById('firstName').value;
-        const email = document.getElementById('email').value;
-        
-        try {
-            // Submit to Zapier webhook
-            await fetch('https://hooks.zapier.com/hooks/catch/14335374/uy7wpaj/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    firstName: firstName,
-                    email: email,
-                    source: 'habitemails-optin',
-                    timestamp: new Date().toISOString()
-                })
+      document.addEventListener("DOMContentLoaded", function () {
+        // Smooth scroll for hero CTA button
+        document
+          .querySelector(".hero-cta")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+            document.getElementById("optin-form").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
             });
-        } catch (error) {
-            console.log('Webhook error:', error);
+          });
+
+        // Form submission handler
+        const form = document.getElementById("optinForm");
+        const submitBtn = document.getElementById("submitBtn");
+
+        // Form validation patterns
+        const patterns = {
+          firstName: /^[a-zA-Z\s]{2,}$/,
+          email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        };
+
+        // Validate individual field
+        function validateField(field) {
+          const value = field.value.trim();
+          const fieldName = field.name;
+
+          if (!value) return false;
+          if (patterns[fieldName]) {
+            return patterns[fieldName].test(value);
+          }
+          return true;
         }
-        
-        // Always redirect to thank you page
-        window.location.href = '/thankyou';
-    }
+
+        // Handle form submission
+        async function handleSubmit(event) {
+          event.preventDefault();
+
+          // Get form values
+          const firstName = document.getElementById("firstName");
+          const email = document.getElementById("email");
+
+          // Validate all fields
+          if (!validateField(firstName) || !validateField(email)) {
+            return;
+          }
+
+          // Update button state
+          submitBtn.textContent = "Submitting...";
+          submitBtn.disabled = true;
+
+          // Prepare form data
+          const formData = {
+            firstName: firstName.value.trim(),
+            email: email.value.trim(),
+            source: "habitemails-optin",
+            timestamp: new Date().toISOString(),
+          };
+
+          try {
+            // Submit to webhook (without Content-Type header as per Option 2)
+            await fetch(
+              "https://hooks.zapier.com/hooks/catch/4887950/uyjq70v/",
+              {
+                method: "POST",
+                body: JSON.stringify(formData),
+              }
+            );
+          } catch (error) {
+            console.error("Submission error:", error);
+          }
+
+          // Always redirect to thank you page
+          window.location.href = "/thankyou";
+        }
+
+        // Attach event listener
+        form.addEventListener("submit", handleSubmit);
+
+        // Real-time validation feedback (optional)
+        const inputs = form.querySelectorAll(".form-input");
+        inputs.forEach((input) => {
+          input.addEventListener("blur", function () {
+            validateField(this);
+          });
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
