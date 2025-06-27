@@ -1021,9 +1021,48 @@
             });
           });
 
+        // Qualifying question logic
+        const qualifyingOptions = document.querySelectorAll('.qualifying-option');
+        const formContainer = document.querySelector('.form-container');
+        const submitBtn = document.getElementById("submitBtn");
+        let isQualified = false;
+
+        // Initially disable the form
+        formContainer.classList.add('disabled');
+        submitBtn.classList.add('disabled');
+        submitBtn.textContent = "Select an option above first";
+
+        qualifyingOptions.forEach(option => {
+          option.addEventListener('click', function() {
+            // Remove selected class from all options
+            qualifyingOptions.forEach(opt => opt.classList.remove('selected', 'qualified'));
+            
+            // Add selected class to clicked option
+            this.classList.add('selected');
+            
+            const value = this.dataset.value;
+            
+            if (value === 'qualified') {
+              // User has 1000+ subscribers
+              this.classList.add('qualified');
+              isQualified = true;
+              formContainer.classList.remove('disabled');
+              submitBtn.classList.remove('disabled');
+              submitBtn.classList.add('enabled');
+              submitBtn.textContent = "Send Me The Guide";
+            } else {
+              // User is still growing
+              isQualified = false;
+              formContainer.classList.add('disabled');
+              submitBtn.classList.remove('enabled');
+              submitBtn.classList.add('disabled');
+              submitBtn.textContent = "This guide is for 1000+ subscriber lists";
+            }
+          });
+        });
+
         // Form submission handler
         const form = document.getElementById("optinForm");
-        const submitBtn = document.getElementById("submitBtn");
 
         // Form validation patterns
         const patterns = {
@@ -1047,6 +1086,12 @@
         async function handleSubmit(event) {
           event.preventDefault();
 
+          // Check if qualified
+          if (!isQualified) {
+            alert("Please select that you have 1000+ subscribers to continue.");
+            return;
+          }
+
           // Get form values
           const firstName = document.getElementById("firstName");
           const email = document.getElementById("email");
@@ -1066,10 +1111,11 @@
             email: email.value.trim(),
             source: "habitemails-optin",
             timestamp: new Date().toISOString(),
+            qualified: "1000plus"
           };
 
           try {
-            // Submit to webhook (without Content-Type header as per Option 2)
+            // Submit to webhook
             await fetch(
               "https://hooks.zapier.com/hooks/catch/14335374/uyjxqkx/",
               {
