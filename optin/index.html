@@ -505,96 +505,97 @@
         color: var(--text-primary);
       }
 /* Qualifying Question Styles */
-.qualifying-section {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  margin-bottom: var(--space-xl);
-  text-align: center;
-}
+      .qualifying-section {
+        background: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        margin-bottom: var(--space-xl);
+        text-align: center;
+      }
 
-.qualifying-question {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: var(--space-md);
-  line-height: 1.4;
-}
+      .qualifying-question {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: var(--space-md);
+        line-height: 1.4;
+      }
 
-.qualifying-options {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-  max-width: 300px;
-  margin: 0 auto;
-}
+      .qualifying-options {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        max-width: 300px;
+        margin: 0 auto;
+      }
 
-.qualifying-option {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-sm);
-  padding: var(--space-md);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  color: var(--text-primary);
-}
+      .qualifying-option {
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: var(--radius-sm);
+        padding: var(--space-md);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
 
-.qualifying-option:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
-}
+      .qualifying-option:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
 
-.qualifying-option.selected {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--white);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
-}
+      .qualifying-option.selected {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: var(--white);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+      }
 
-.qualifying-option.qualified {
-  background: var(--success);
-  border-color: var(--success);
-}
+      .qualifying-option.qualified {
+        background: var(--success);
+        border-color: var(--success);
+      }
 
-.form-container.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
+      .form-container.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
 
-.submit-button.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none !important;
-  background: #666 !important;
-}
+      .submit-button.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none !important;
+        background: #666 !important;
+      }
 
-.submit-button.enabled {
-  background: linear-gradient(135deg, var(--success) 0%, #047857 100%);
-  box-shadow: 0 0 20px rgba(5, 150, 105, 0.4);
-  animation: glow 2s ease-in-out infinite alternate;
-}
+      .submit-button.enabled {
+        background: linear-gradient(135deg, var(--success) 0%, #047857 100%);
+        box-shadow: 0 0 20px rgba(5, 150, 105, 0.4);
+        animation: glow 2s ease-in-out infinite alternate;
+      }
 
-@keyframes glow {
-  from {
-    box-shadow: 0 0 20px rgba(5, 150, 105, 0.4);
-  }
-  to {
-    box-shadow: 0 0 30px rgba(5, 150, 105, 0.8);
-  }
-}
+      @keyframes glow {
+        from {
+          box-shadow: 0 0 20px rgba(5, 150, 105, 0.4);
+        }
+        to {
+          box-shadow: 0 0 30px rgba(5, 150, 105, 0.8);
+        }
+      }
 
-@media (max-width: 768px) {
-  .qualifying-options {
-    max-width: 100%;
-  }
-  
-  .qualifying-option {
-    padding: var(--space-sm);
-    font-size: 0.9rem;
-  }
+      @media (max-width: 768px) {
+        .qualifying-options {
+          max-width: 100%;
+        }
+        
+        .qualifying-option {
+          padding: var(--space-sm);
+          font-size: 0.9rem;
+        }
+      }
       .guarantee-badge {
         background: linear-gradient(
           135deg,
